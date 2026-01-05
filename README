@@ -1,0 +1,111 @@
+
+# CALCULADORA IP — CIDR & VLSM
+
+## Descripción general
+Aplicación para calcular y practicar subneteo IPv4 mediante CIDR y VLSM. Provee una interfaz gráfica clara que muestra direcciones de red, broadcast, rangos de hosts, máscaras, eficiencia de direccionamiento y división óptima de subredes.
+
+## Tecnologías
+- Python 3  
+- Tkinter / CustomTkinter (GUI)  
+- ipaddress (manipulación de redes)  
+- dataclasses (estructuras de datos)  
+- Pillow (soporte gráfico)  
+- CSV (exportación)
+
+## Funcionalidades principales
+
+### Calculadora CIDR
+Permite obtener información completa de una red IPv4 a partir de una IP y una máscara (CIDR o decimal).
+
+Calcula:
+- Dirección de red  
+- Máscara de red  
+- Notación CIDR  
+- Dirección de broadcast  
+- Primer y último host  
+- Rango de hosts  
+- Total de direcciones y hosts utilizables  
+- Clase de red (A, B, C, ...)  
+- Tipo de red (Privada, Pública, Enlace local)  
+- Representación binaria de IP y máscara
+
+### Calculadora VLSM
+Divide una red principal en subredes de distinto tamaño según requerimientos de hosts.
+
+Permite:
+- Añadir subredes con nombre, cantidad de hosts y prioridad (Alta/Media/Baja)  
+- Orden automático por tamaño y asignación óptima de prefijos CIDR  
+- Prevención de solapamientos y verificación de espacio disponible  
+- Cálculo de rango, máscara y broadcast por subred
+
+## Resultados y estadísticas
+La vista de resultados incluye:
+- Tabla con todas las subredes calculadas  
+- Estadísticas: número de subredes, hosts totales, hosts asignados, hosts disponibles, hosts sin asignar, eficiencia de uso  
+- Exportación a CSV
+
+## Cómo usar
+
+### Ejecución
+Ejecutar el archivo principal:
+```
+python calculadora_ip.py
+```
+Si faltan dependencias, el programa intentará instalarlas.
+
+### Uso — Calculadora CIDR
+1. Ir a la pestaña "CIDR".  
+2. Ingresar una dirección de red (ej.: `192.168.1.0`).  
+3. Elegir máscara en formato CIDR (`/24`) o decimal (`255.255.255.0`).  
+4. Pulsar "CALCULAR SUBNET".
+
+Ejemplo de salida:
+```
+Dirección de red: 192.168.1.0
+Broadcast: 192.168.1.255
+Hosts utilizables: 254
+Rango de hosts: 192.168.1.1 - 192.168.1.254
+Clase de red: C
+Tipo de red: Privada
+```
+
+### Uso — Calculadora VLSM
+1. Ir a la pestaña "VLSM".  
+2. Ingresar la red principal (ej.: `192.168.0.0/24`).  
+3. Agregar subredes con nombre y hosts requeridos (ej.: Administración: 50, Ventas: 30, Soporte: 10).  
+4. Pulsar "CALCULAR VLSM".
+
+Ejemplo de resultado:
+- Subred: Administración — CIDR `/26` — Hosts requeridos: 50 — Hosts disponibles: 62  
+- Subred: Ventas — CIDR `/27` — Hosts requeridos: 30 — Hosts disponibles: 30  
+- Subred: Soporte — CIDR `/28` — Hosts requeridos: 10 — Hosts disponibles: 14
+
+## Aspectos importantes
+- La red principal debe ingresarse en formato IP/CIDR.  
+- Los hosts deben ser enteros positivos.  
+- El sistema asigna subredes de mayor a menor tamaño.  
+- Si no hay espacio suficiente, se mostrará una advertencia.  
+- Las direcciones de red y broadcast se reservan automáticamente.
+
+## Errores comunes
+- IP mal escrita  
+- Máscara inválida  
+- Hosts negativos o no numéricos  
+- Falta de espacio en la red principal  
+Todos los errores y advertencias aparecen en la barra de estado inferior.
+
+## Cómo verificar resultados
+- El rango de hosts no incluye la dirección de red ni el broadcast.  
+- El número de hosts disponibles coincide con la potencia de 2 correspondiente.  
+- No hay traslapes entre subredes.  
+- La eficiencia refleja correctamente el uso de hosts.
+
+## Exportación
+Resultados VLSM exportables a CSV para reportes o análisis en Excel.
+
+## Autores
+- Rodríguez Paredes Roberto  
+- Daniela Maldonado Bedolla
+
+## Uso académico
+Proyecto desarrollado con fines educativos para apoyo en materias relacionadas con redes de computadoras y direccionamiento IP.
